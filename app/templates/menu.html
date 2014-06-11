@@ -1,0 +1,18 @@
+    <nav>
+        <ul>
+            <li id="flechita_nav"><a href="/"></a></li>
+            {% for cat in menu %}
+                <li><a href="{{cat.url}}" {% if cat.active%}style="color:red"{% endif %}>{{cat.name}}</a></li>
+            {% endfor %}
+            <li id="publicar_nav"><a href="{% url "add" %}">Publicar</a></li>
+        </ul>
+    </nav>
+    <nav>
+        <ul>
+            <li id="flechita_nav"><a href="/"></a></li>
+            {% for cat in categorias %}
+                <li><a href="{% url "categoria" cat.pk %}">{{cat}}</a></li>
+            {% endfor %}
+            <li id="publicar_nav"><a href="{% url "add" %}">Publicar</a></li>
+        </ul>
+    </nav>

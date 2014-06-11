@@ -1,0 +1,81 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" 
+		  content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<title>Puls3: Comunidad online de gente pro y (no sé que más escribir)</title>
+	<link rel="stylesheet" href="normalize.css" />
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="{% static "estilos.css"%}" />
+	<link rel="stylesheet" href="/static/responsive.css" />
+</head>
+<body>
+	<!-- comentario de lo que sea -->
+	<header>
+		<figure id="logo">
+			<img src="logo.png" />
+		</figure>
+		<h1 id="titulo_header">Puls3: Comunidad de gente cool, atractiva y millonaria</h1>
+		<figure id="avatar">
+			<img src="avatar.jpg" />
+			<figcaption></figcaption>
+		</figure>
+	</header>
+	{% include 'menu.html' %}
+	<aside id="bienvenida">
+	    {% if not request.user.is_authenticated %}
+		<h2>Hola, registrate!</h2>
+		<p>Es importante registrarte porque LOL!</p>
+		<a id="registro" href="#">Registrate acá</a>
+		<p id="mensaje_registro">En serio, registrate por favor</p>
+		{% endif %}
+	</aside>
+	<section id="contenido">
+	    {% if enlaces %}
+	    
+	    {% for enlace in enlaces %}
+		<article class="item">
+			<figure class="imagen_item">
+				<img src="imagen.jpg" />
+			</figure>
+			<h2 class="titulo_item">
+				<a href="{{enlace.enlace}}">{{enlace.titulo}}</a>
+			</h2>
+			<p class="autor_item">
+				Por <a href="#">{{enlace.usuario}}</a>
+			</p>
+			<p class="datos_item">
+				<a class="tag_item" href="#">{{enlace.categoria}}</a>
+				<span class="fecha_item">Hace <strong>{{enlace.timestamp|timesince}}</strong> min</span>
+				<a class="guardar_item" href="#"></a>
+			</p>
+			<p class="votacion">
+				<a class="up" href="{% url "plus" enlace.pk %}"></a>
+				{{enlace.votos}}
+				<a class="down" href="{% url "minus" enlace.pk %}"></a>
+			</p>
+		</article>
+		{% endfor %}
+		{% else %}
+		    NO HAY ENLACES GUARDADOS Agrega!
+		{% endif %}
+	</section>
+	<footer>
+		<p><strong>Powered by Platzi!</strong> {{frase}}</p>
+		<p>Mejorando.la 2013 ®</p>
+	</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
